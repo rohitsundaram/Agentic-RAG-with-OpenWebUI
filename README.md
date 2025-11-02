@@ -7,6 +7,16 @@ A production-ready Retrieval-Augmented Generation (RAG) system with multi-agent 
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.115+-009688?logo=fastapi)](https://fastapi.tiangolo.com/)
 [![LlamaIndex](https://img.shields.io/badge/LlamaIndex-0.12+-6B46C1)](https://www.llamaindex.ai/)
 
+## Why This Project Matters
+
+Most RAG demos stop at basic retrieval and one-shot answering. This project is designed for production-style reliability:
+
+- multi-agent answer generation and validation with CrewAI,
+- conversational memory for follow-up queries,
+- observability with Phoenix tracing,
+- measurable quality with RAGAs metrics,
+- repeatable local deployment using Docker Compose.
+
 ## 🌟 Features
 
 
@@ -19,6 +29,22 @@ A production-ready Retrieval-Augmented Generation (RAG) system with multi-agent 
 - **🎨 Modern UI** - OpenWebUI chat interface
 - **📄 Document Processing** - Docling for advanced PDF parsing
 - **🗄️ Vector Storage** - PostgreSQL with PGVector extension
+
+## 📊 Evaluation Snapshot
+
+The API exposes built-in quality evaluation using RAGAs (`faithfulness`, `answer_relevancy`, `context_precision`, `context_recall`).
+
+```bash
+curl -X POST "http://localhost:4000/evaluate" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "question": "What is procurement?",
+    "ground_truth": "Procurement is the process of acquiring goods and services",
+    "top_k": 5
+  }'
+```
+
+Use these metrics in your own benchmark table to track quality improvements across prompt, retrieval, and re-ranking changes.
 
 ## 📋 Table of Contents
 
@@ -38,8 +64,8 @@ A production-ready Retrieval-Augmented Generation (RAG) system with multi-agent 
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/RakshithaMallabadi/AgenticRAG-with-OpenWebUI.git
-cd AgenticRAG-with-OpenWebUI
+git clone https://github.com/rohitsundaram/Agentic-RAG-with-OpenWebUI.git
+cd Agentic-RAG-with-OpenWebUI
 ```
 
 ### 2. Start All Services
@@ -132,12 +158,13 @@ For detailed architecture information, see [Architecture.md](Architecture.md).
 
 ```bash
 # 1. Clone repository
-git clone https://github.com/RakshithaMallabadi/AgenticRAG-with-OpenWebUI.git
-cd AgenticRAG-with-OpenWebUI
+git clone https://github.com/rohitsundaram/Agentic-RAG-with-OpenWebUI.git
+cd Agentic-RAG-with-OpenWebUI
 
 # 2. Configure environment (optional)
-cp .env.example .env
-# Edit .env with your configurations
+# Create .env only if you want to override defaults
+touch .env
+# Add any environment overrides as needed
 
 # 3. Start all services
 docker compose up -d
